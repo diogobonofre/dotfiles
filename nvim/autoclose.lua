@@ -1,0 +1,1 @@
+/home/vaeep/.config/nvim/after/plugin/autoclose.lua
