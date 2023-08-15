@@ -1,1 +1,0 @@
-/home/vaeep/.config/nvim/lua/vaeep/packer.lua

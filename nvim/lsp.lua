@@ -1,1 +1,0 @@
-/home/vaeep/.config/nvim/after/plugin/lsp.lua
