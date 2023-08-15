@@ -53,4 +53,6 @@ return require('packer').startup(function(use)
     use 'rafamadriz/friendly-snippets'
 
     use 'preservim/nerdtree'
+
+    use 'voldikss/vim-floaterm'
 end)
