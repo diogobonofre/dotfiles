@@ -23,8 +23,9 @@ return require('packer').startup(function(use)
 		run = ':TSUpdate'
 	}
 
+    -- Colorschemes
 	use {"xero/miasma.nvim"}
-	vim.cmd("colorscheme miasma")
+	use {"aktersnurra/no-clown-fiesta.nvim"}
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
