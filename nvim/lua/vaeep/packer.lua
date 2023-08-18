@@ -7,6 +7,8 @@ return require('packer').startup(function(use)
 	-- Packer can manage itself
 	use 'wbthomason/packer.nvim'
 
+    use "nvim-lua/plenary.nvim"
+
 	use {
 		'nvim-lualine/lualine.nvim',
 		requires = { 'nvim-tree/nvim-web-devicons', opt = true }
@@ -26,6 +28,7 @@ return require('packer').startup(function(use)
     -- Colorschemes
 	use {"xero/miasma.nvim"}
 	use {"aktersnurra/no-clown-fiesta.nvim"}
+    use {"tomasiser/vim-code-dark"}
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',

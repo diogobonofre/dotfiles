@@ -16,3 +16,9 @@ vim.api.nvim_set_keymap('n', '<F5>', ':FloatermToggle<CR>', { silent = true })
 vim.api.nvim_set_keymap('t', '<F5>', '<C-\\><C-n>:FloatermToggle<CR>', { silent = true })
 vim.api.nvim_set_keymap('n', '<F9>', ':FloatermKill<CR>', { silent = true })
 vim.api.nvim_set_keymap('t', '<F9>', '<C-\\><C-n>:FloatermKill<CR>', { silent = true })
+
+-- Configure terminal window display
+vim.g.floaterm_width = 0.9
+vim.g.floaterm_height = 0.9
+vim.g.floaterm_titleposition = 'left'
+vim.g.floaterm_wintype = 'float'
