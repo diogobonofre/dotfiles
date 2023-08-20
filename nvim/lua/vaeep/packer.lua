@@ -29,6 +29,21 @@ return require('packer').startup(function(use)
 	use {"xero/miasma.nvim"}
 	use {"aktersnurra/no-clown-fiesta.nvim"}
     use {"tomasiser/vim-code-dark"}
+    use {'ramojus/mellifluous.nvim'}
+
+    -- CMP
+    use 'hrsh7th/cmp-nvim-lsp'
+    use 'hrsh7th/cmp-buffer'
+    use 'hrsh7th/cmp-path'
+    use 'hrsh7th/cmp-cmdline'
+    use 'hrsh7th/nvim-cmp'
+
+    use({
+      'garyhurtz/cmp_bulma.nvim',
+      config = function()
+        require('cmp_bulma'):setup()
+      end
+    })
 
 	use {
 		'VonHeikemen/lsp-zero.nvim',
@@ -53,10 +68,11 @@ return require('packer').startup(function(use)
     use 'lewis6991/gitsigns.nvim' -- OPTIONAL: for git status
 
     use 'romgrk/barbar.nvim'
-    use 'saadparwaiz1/cmp_luasnip'
     use 'rafamadriz/friendly-snippets'
 
     use 'preservim/nerdtree'
 
     use 'voldikss/vim-floaterm'
+
+ 	use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
 end)

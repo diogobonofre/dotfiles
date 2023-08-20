@@ -21,9 +21,27 @@ cmp.setup({
     sources = {
         { name = 'nvim_lsp'},
         { name = 'luasnip' },
+        {
+            name = 'bulma',
+            option = {
+                filetypes = {
+                    "cshtml",
+                },
+            },
+        },
+        {
+            name = 'buffer',
+            option = {
+                get_bufnrs = function()
+                    return vim.api.nvim_list_bufs()
+                end
+            },
+        },
+        { name = 'vsnip' },
+        { name = "cmp_tabnine" },
     },
     mapping = {
-		['<CR>'] = cmp.mapping.confirm({ select = false }),
-		['<C-Space>'] = cmp.mapping.complete()
-	}
+        ['<CR>'] = cmp.mapping.confirm({ select = false }),
+        ['<C-Space>'] = cmp.mapping.complete()
+    }
 })
