@@ -37,7 +37,6 @@ return require('packer').startup(function(use)
     use 'hrsh7th/cmp-path'
     use 'hrsh7th/cmp-cmdline'
     use 'hrsh7th/nvim-cmp'
-
     use({
       'garyhurtz/cmp_bulma.nvim',
       config = function()
@@ -75,4 +74,6 @@ return require('packer').startup(function(use)
     use 'voldikss/vim-floaterm'
 
  	use {'tzachar/cmp-tabnine', run='./install.sh', requires = 'hrsh7th/nvim-cmp'}
+
+    use 'tpope/vim-fugitive'
 end)
