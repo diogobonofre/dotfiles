@@ -1,9 +1,9 @@
 # Enable Powerlevel10k instant prompt. Should stay close to the top of ~/.zshrc.
 # Initialization code that may require console input (password prompts, [y/n]
 # confirmations, etc.) must go above this block; everything else may go below.
-if [[ -r "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh" ]]; then
-  source "${XDG_CACHE_HOME:-$HOME/.cache}/p10k-instant-prompt-${(%):-%n}.zsh"
-fi
+
+
+export OPEN_WEATHER_KEY=3597605375f317b93b6f4e6c96f158f0
 
 # PATH
 export PATH="/usr/local/texlive/2023/bin/x86_64-linux:$PATH"
@@ -69,10 +69,8 @@ source $ZSH/oh-my-zsh.sh
 
 # User configuration
 . /opt/asdf-vm/asdf.sh
-. ~/.asdf/plugins/dotnet-core/set-dotnet-home.zsh
 
 # zsh parameter completion for the dotnet CLI
-
 _dotnet_zsh_complete()
 {
   local completions=("$(dotnet complete "$words")")
@@ -108,6 +106,7 @@ compdef _dotnet_zsh_complete dotnet
 # Example aliases
 alias vim="nvim"
 alias z="zathura"
+alias t="tree --filesfirst -Ar"
 
 # To customize prompt, run `p10k configure` or edit ~/.p10k.zsh.
 [[ ! -f ~/.p10k.zsh ]] || source ~/.p10k.zsh

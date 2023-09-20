@@ -30,6 +30,7 @@ return require('packer').startup(function(use)
 	use {"aktersnurra/no-clown-fiesta.nvim"}
     use {"tomasiser/vim-code-dark"}
     use {'ramojus/mellifluous.nvim'}
+    use {'rainglow/vim'}
 
     -- CMP
     use 'hrsh7th/cmp-nvim-lsp'
@@ -77,5 +78,23 @@ return require('packer').startup(function(use)
 
     use 'tpope/vim-fugitive'
 
-    use 'xuhdev/vim-latex-live-preview'
+    use 'lervag/vimtex'
+
+    use 'jlcrochet/vim-razor'
+
+    use {
+        'vimwiki/vimwiki',
+        config = function()
+            vim.g.vimwiki_list = {
+                {
+                    path = '~/vimwiki',
+                    syntax = 'markdown',
+                    ext = '.md',
+                }
+            }
+        end
+    }
+
+    use 'mhartington/formatter.nvim'
+    use 'mfussenegger/nvim-lint'
 end)

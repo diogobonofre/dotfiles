@@ -22,6 +22,22 @@ vim.opt.signcolumn = "no"
 
 vim.opt.updatetime = 50
 
--- vim.opt.colorcolumn = "80"
+vim.opt.colorcolumn = "90"
+vim.opt.cursorline = true
+vim.opt.linespace = 3
+vim.opt.numberwidth = 5
+
+--vim.cmd('wincmd v')
 
 vim.g.mapleader = " "
+
+-- VimWiki Pre-requesites
+
+-- Disable compatibility mode
+vim.cmd('set nocompatible')
+
+-- Enable file type detection and plugins
+vim.cmd('filetype plugin on')
+
+-- Enable syntax highlighting
+vim.cmd('syntax on')
