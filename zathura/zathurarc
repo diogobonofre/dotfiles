@@ -5,7 +5,6 @@ set adjust-open "best-fit"
 set pages-per-row 1
 
 #stop at page boundries
->>>>>>> main
 set scroll-page-aware "true"
 set scroll-full-overlap 0.01
 set scroll-step 100
