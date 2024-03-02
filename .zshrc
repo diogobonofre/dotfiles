@@ -16,7 +16,7 @@ zstyle ':completion:*' menu select
 
 alias vim="nvim"
 alias vimc="cd ~/.config/nvim && vim ."
-alias tokens="cat ~/personal/github_tokens.txt"
+alias tokens="cat ~/Documents/tokens/github_tokens.txt"
 alias t="tty-clock -f %d-%m-%y -cC 3"
 alias mtx="unimatrix -c magenta"
 alias sds="df -h /dev/sdb7"
