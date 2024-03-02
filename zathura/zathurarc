@@ -1,0 +1,28 @@
+# VISUAL
+set adjust-open "best-fit"
+set pages-per-row 1
+
+set scroll-page-aware "true"
+set scroll-full-overlap 0.01
+set scroll-step 100
+
+set incremental-search true
+
+set statusbar-h-padding 0
+set statusbar-v-padding 0
+
+set index-bg                    "#0c0b0a" # base02
+set index-fg                    "#a0a4a8" # base1
+set index-active-bg             "#8487af" # base01
+set index-active-fg             "#0c0b0a" # base2
+
+set inputbar-bg                 "#0c0b0a" # base01
+set inputbar-fg                 "#a0a4a8" # base2
+
+set statusbar-bg                "#0c0b0a" # base02
+set statusbar-fg                "#a0a4a8" # base1
+
+set recolor                     true
+set recolor-lightcolor          "#0c0b0a" # base02
+set recolor-darkcolor           "#a0a4a8" # base1
+set recolor-keephue             true      # keep original color
