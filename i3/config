@@ -13,7 +13,7 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-exec --no-startup-id ~/repos/i3-layout-manager/layout_manager.sh AllInOneWorkspace
+exec --no-startup-id ~/bin/i3-layout-manager/layout_manager.sh AllInOneWorkspace
 
 exec --no-startup-id alacritty
 exec --no-startup-id emacs
@@ -21,6 +21,7 @@ exec --no-startup-id firefox
 exec --no-startup-id spotify-launcher 
 exec --no-startup-id zathura
 exec --no-startup-id discord
+exec --no-startup-id nautilus
 
 set $mod mod4
 set $up k
