@@ -3,3 +3,5 @@
 	name = Vaeep
 [init]
 	defaultBranch = master
+[core]
+	editor = nvim

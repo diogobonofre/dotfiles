@@ -1,7 +1,11 @@
-# VISUAL
+# Open document in fit-width mode by default
 set adjust-open "best-fit"
+
+# One page per row by default
 set pages-per-row 1
 
+#stop at page boundries
+>>>>>>> main
 set scroll-page-aware "true"
 set scroll-full-overlap 0.01
 set scroll-step 100
@@ -25,4 +29,3 @@ set statusbar-fg                "#a0a4a8" # base1
 set recolor                     true
 set recolor-lightcolor          "#0c0b0a" # base02
 set recolor-darkcolor           "#a0a4a8" # base1
-set recolor-keephue             true      # keep original color
