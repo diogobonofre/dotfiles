@@ -20,11 +20,11 @@ f() {
 
   # Check if tmux is running
   if [ -n "$TMUX" ]; then
-    # tmux is running, open file in a new tmux pane
-    file=$(fzf --preview 'bat --style=numbers --color=always {}' --preview-window=up:60%:wrap) && tmux split-window -h "nvim $file"
-  else
-    # tmux is not running, open file in Vim directly
+    # tmux is running, open file in Vim directly
     file=$(fzf --preview 'bat --style=numbers --color=always {}' --preview-window=up:60%:wrap) && nvim "$file"
+  else
+    # tmux is not running, start a new Tmux session and open file in Vim
+    file=$(fzf --preview 'bat --style=numbers --color=always {}' --preview-window=up:60%:wrap) && tmux new-session -d "nvim $file"
   fi
 }
 
