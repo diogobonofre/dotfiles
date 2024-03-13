@@ -16,17 +16,17 @@ set incremental-search true
 set statusbar-h-padding 0
 set statusbar-v-padding 0
 
-set index-bg                    "#0c0b0a" # base02
-set index-fg                    "#a0a4a8" # base1
-set index-active-bg             "#8487af" # base01
-set index-active-fg             "#0c0b0a" # base2
+set index-bg                    "#111111" # base02
+set index-fg                    "#ffffff" # base1
+set index-active-bg             "#c27127" # base01
+set index-active-fg             "#111111" # base2
 
-set inputbar-bg                 "#0c0b0a" # base01
-set inputbar-fg                 "#a0a4a8" # base2
+set inputbar-bg                 "#111111" # base01
+set inputbar-fg                 "#ffffff" # base2
 
-set statusbar-bg                "#0c0b0a" # base02
-set statusbar-fg                "#a0a4a8" # base1
+set statusbar-bg                "#111111" # base02
+set statusbar-fg                "#ffffff" # base1
 
 set recolor                     true
-set recolor-lightcolor          "#0c0b0a" # base02
-set recolor-darkcolor           "#a0a4a8" # base1
+set recolor-lightcolor          "#111111" # base02
+set recolor-darkcolor           "#ffffff" # base1

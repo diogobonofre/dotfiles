@@ -1,112 +1,14 @@
 return {
-	--	'AlessandroYorba/Breve',
-	--	'AlessandroYorba/Sierra',
-	--	'AlessandroYorba/Despacio',
-	--	'AlessandroYorba/Arcadia',
 	{
-		"AlessandroYorba/Alduin",
-		--dependencies = "rktjmp/lush.nvim",
+		"rose-pine/neovim",
 		config = function()
-			--	vim.g.alduin_Shout_Dragon_Aspect = 1
-			--	vim.g.alduin_Shout_Become_Ethereal = 0
-			--	vim.g.alduin_Shout_Fire_Breath = 0
-			vim.cmd([[:colorscheme solarized8_flat]])
-			--vim.cmd([[:hi Normal guibg=#141414]])
-			--vim.cmd([[:hi Pmenu guibg=#222222]])
-			--vim.cmd([[:hi ColorColumn guibg=#222222]])
+			vim.cmd([[:colorscheme rose-pine]])
+			vim.cmd([[:hi Normal guibg=#111111]])
+			vim.cmd([[:hi Pmenu guibg=#111111]])
+			vim.cmd([[:hi ColorColumn guibg=#1c1c1c]])
+			vim.api.nvim_set_hl(0, 'Comment', { italic = true })
+			vim.api.nvim_set_hl(0, 'Keyword', { italic = true, bold = true })
+			vim.api.nvim_set_hl(0, 'Variable', { italic = false })
 		end
 	},
-	--"mcchrish/zenbones.nvim",
-	--"Yazeed1s/oh-lucy.nvim",
-	--	{
-	--		"crispybaccoon/aki",
-	--		commit = "53c72e1c30f13646515314da96f098e0dfc150a1",
-	--		config = function()
-	--			require("aki").setup({
-	--				transparent_background = false,
-	--				contrast_dark = "medium",
-	--				contrast_light = "medium",
-	--				emphasis = {
-	--					general = { italic = false },
-	--					comment = {},
-	--					keyword = { italic = false },
-	--					type = { type = false },
-	--				},
-	--				override_terminal = true,
-	--				style = {
-	--					cursorline = { soft = true, contrast_currentline = false },
-	--					tabline = { reverse = true, color = "seiun" },
-	--					search = { reverse = false, color = "sakaeru" },
-	--				},
-	--				overrides = {}, -- add custom overrides
-	--				plugins = true,
-	--			})
-	--			vim.api.nvim_set_hl(0, "FloatBorder", {})
-	--			vim.api.nvim_set_hl(0, "NormalFloat", { link = "Normal" })
-	--			vim.api.nvim_set_hl(0, "LspInfoBorder", { link = "Normal" })
-	--			vim.api.nvim_set_hl(0, "LineNr", { link = "Normal" })
-	--			vim.api.nvim_set_hl(0, "LineNrAbove", { link = "Comment" })
-	--			vim.api.nvim_set_hl(0, "LineNrBelow", { link = "Comment" })
-	--			vim.api.nvim_set_hl(0, "@variable.member", { link = "TSField" })
-	--			-- vim.api.nvim_set_hl(0, "@tag.scss", { link = "TSField" })
-	--			vim.cmd.colorscheme("aki")
-	--		end,
-	--	},
-	--	{
-	--		'dzfrias/noir.nvim',
-	--		config = function()
-	--			vim.cmd([[:colorscheme noir]])
-	--			vim.cmd([[:hi Normal guibg=none]])
-	--			vim.cmd([[:hi Pmenu guibg=dark]])
-	--			vim.cmd([[:hi ColorColumn guibg=black]])
-	--		end
-	--	},
-	--'TheNiteCoder/mountaineer.vim',
-	--	'AlessandroYorba/Sierra',
-	--	'ntk148v/komau.vim',
-	--	{
-	--		'DanielEliasib/sweet-fusion',
-	--		name = 'sweet-fusion',
-	--		priority = 1000,
-	--		opts = {
-	--			terminal_colors = false,
-	--			hl_styles = {
-	--				comments = { italic = true },
-	--				keywords = { italic = true },
-	--				functions = {},
-	--				variables = {}
-	--			},
-	--			-- Set transparent background
-	--			transparency = false,
-	--			dim_inactive = false,
-	--		},
-	--		config = function()
-	--			vim.cmd([[:hi Pmenu guibg=dark]])
-	--			vim.cmd([[:colorscheme noir]])
-	--		end
-	--	},
-	--"RRethy/base16-nvim",
-	-- "ramojus/mellifluous.nvim",
-	-- "mcchrish/zenbones.nvim",
-	-- "aktersnurra/no-clown-fiesta.nvim",
-	-- "zootedb0t/citruszest.nvim",
-	-- "nanotech/jellybeans.vim",
-	--	"strange/strange.vim",
-	-- "ribru17/bamboo.nvim",
-	--"lunacookies/vim-substrata",
-	-- "cocopon/iceberg.vim",
-	-- "xero/sourcerer.vim",
-	--	"vim-scripts/strange",
-	--"vim-scripts/dante.vim",
-	--	"scttymn/vim-twilight",
-	--	"Lokaltog/vim-distinguished",
-	"lifepillar/vim-solarized8",
-	--	{
-	--		"mellow-theme/mellow.nvim",
-	--		dependencies = "rktjmp/lush.nvim",
-	--		config = function()
-	--			vim.g.base16_colorspace = 256
-	--			vim.cmd([[:colorscheme base16-classic-dark]])
-	--		end
-	--	},
 }

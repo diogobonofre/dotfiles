@@ -13,15 +13,12 @@ bindsym XF86AudioLowerVolume exec --no-startup-id pactl set-sink-volume @DEFAULT
 bindsym XF86AudioMute exec --no-startup-id pactl set-sink-mute @DEFAULT_SINK@ toggle && $refresh_i3status
 bindsym XF86AudioMicMute exec --no-startup-id pactl set-source-mute @DEFAULT_SOURCE@ toggle && $refresh_i3status
 
-exec --no-startup-id ~/bin/i3-layout-manager/layout_manager.sh AllInOneWorkspace
-
 exec --no-startup-id alacritty
 exec --no-startup-id emacs
 exec --no-startup-id firefox 
 exec --no-startup-id spotify-launcher 
-exec --no-startup-id zathura
 exec --no-startup-id discord
-exec --no-startup-id nautilus
+exec --no-startup-id picom -b --transparent-clipping
 
 set $mod mod4
 set $up k
@@ -159,9 +156,9 @@ gaps inner 0px
 focus_on_window_activation focus
 
 bar {
-	mode invisible
+	mode dock
 	modifier $mod
-	position bottom
+	position top
   status_command i3status
 	font pango:Iosevka NFP Regular 8
 	separator_symbol "|"
@@ -169,10 +166,10 @@ bar {
 	i3bar_command i3bar --transparency
 	tray_output none
 	colors {
-#		background #080808
-		statusline #a0a4a8
-		separator  #a0a4a8
-#		focused_workspace.background #a0a4a8 #080808
+		background #111111
+		statusline #f6f3e8
+		separator  #111111
+		focused_workspace.background #111111 #eb6f92
 	}
 }
 
@@ -182,16 +179,16 @@ bindsym $mod+shift+i exec "i3-msg bar mode dock"
 bindsym $mod+shift+o exec "i3-msg bar mode invisible"
 
 #class 									border	backgr.	text		ind.		child b.
-#client.focused 				  #8487af #8487af #080808 #8487af #8487af 
-#client.focused_inactive #080808 #080808 #8487af #080808 #080808 
-#client.unfocused        #080808 #080808 #8487af #080808 #080808
-#client.urgent           #900000 #900000 #080808 #900000 #900000
-#client.placeholder      #080808 #080808 #8487af #080808 #080808 
-#client.background       #080808
+client.focused 				  #2a2e38 #2a2e38 #ffffff #2a2e38 #2a2e38 
+client.focused_inactive #111111 #111111 #f6f3e8 #111111 #111111 
+client.unfocused        #111111 #111111 #f6f3e8 #111111 #111111
+client.urgent           #900000 #900000 #111111 #900000 #900000
+client.placeholder      #111111 #111111 #f6f3e8 #111111 #111111 
+client.background       #111111
 
 # Border style
-#default_border pixel 3
-#default_floating_border pixel 3
+default_border pixel 1
+default_floating_border pixel 1
 
 #interactive screenshot by pressing printscreen
 bindsym Print exec gnome-screenshot -i 

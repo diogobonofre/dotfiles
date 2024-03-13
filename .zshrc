@@ -19,7 +19,7 @@ alias vimc="cd ~/.config/nvim && vim ."
 alias tokens="cat ~/Documents/tokens/github_tokens.txt"
 alias t="tty-clock -f %d-%m-%y -cC 3"
 alias mtx="unimatrix -c magenta"
-alias sds="df -h /dev/sdb7"
+alias diskspace="df -h /dev/sdb7"
 
 source .xinitrc
 
