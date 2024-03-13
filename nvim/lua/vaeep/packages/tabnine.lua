@@ -3,7 +3,7 @@ return {
 	config = function()
 		require('tabnine').setup({
 			disable_auto_comment = true,
-			accept_keymap = "<C-CR>",
+			accept_keymap = "<M-CR>",
 			debounce_ms = 800,
 			suggestion_color = { gui = "#444444", cterm = 244 },
 			exclude_filetypes = { "TelescopePrompt", "NvimTree" },
