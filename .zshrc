@@ -28,6 +28,14 @@ f() {
   fi
 }
 
+# asdf shims aliases
+alias npm="asdf exec npm"
+alias cargo="asdf exec cargo"
+alias dotnet="asdf exec dotnet"
+alias pip="asdf exec pip"
+alias luarocks="asdf exec luarocks"
+
+# other aliases
 alias vim="nvim"
 alias vimc="cd ~/.config/nvim && vim ."
 alias tokens="cat ~/Documents/tokens/github_tokens.txt"
