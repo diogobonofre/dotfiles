@@ -1,1 +1,3 @@
 */plugin
+.emacs.d/*
+!.emacs.d/init.el
