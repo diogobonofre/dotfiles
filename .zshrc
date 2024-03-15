@@ -15,17 +15,17 @@ compinit
 zstyle ':completion:*' menu select
 
 f() {
-  local file dir
+  local file
 
   # Check if tmux is running
   if [ -n "$TMUX" ]; then
     # tmux is running, open file in Vim directly
     file=$(fzf --preview 'bat --style=numbers --color=always {}' --preview-window=up:60%:wrap)
-    [ -n "$file" ] && dir=$(dirname "$file") && cd "$dir" && nvim "$file"
+    [ -n "$file" ] && nvim -c "cd $(dirname "$file")" "$file"
   else
     # tmux is not running, start a new Tmux session and open file in Vim
     file=$(fzf --preview 'bat --style=numbers --color=always {}' --preview-window=up:60%:wrap)
-    [ -n "$file" ] && dir=$(dirname "$file") && cd "$dir" && tmux new-session -d "nvim $file"
+    [ -n "$file" ] && tmux new-session -d "nvim -c 'cd $(dirname "$file")' '$file'"
   fi
 }
 
