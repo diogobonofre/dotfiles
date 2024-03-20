@@ -1,6 +1,6 @@
 return {
 	"nvim-telescope/telescope.nvim",
-	dependencies = { 
+	dependencies = {
 		"nvim-lua/plenary.nvim",
 		"nvim-tree/nvim-web-devicons",
 	},
@@ -19,10 +19,10 @@ return {
 				}
 			},
 			pickers = {
-				find_files = { theme = "dropdown", },
-				live_grep = { theme = "dropdown", },
-				buffers = { theme = "dropdown", },
-				help_tags = { theme = "dropdown", },
+				find_files = { theme = "ivy", },
+				live_grep = { theme = "ivy", },
+				buffers = { theme = "ivy", },
+				help_tags = { theme = "ivy", },
 			},
 		})
 	end

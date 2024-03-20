@@ -13,6 +13,9 @@ return {
 	config = function()
 		local cmp = require("cmp")
 
+		vim.api.nvim_set_hl(0, "CustomPmenu", { bg = "Black", fg = "White" })
+		vim.api.nvim_set_hl(0, "CustomPmenuSel", { bg = "#111111", fg = "White" })
+
 		require("luasnip.loaders.from_vscode").lazy_load()
 
 		cmp.setup({
@@ -22,7 +25,14 @@ return {
 				end,
 			},
 			window = {
-				documentation = cmp.config.window.bordered(),
+				documentation = cmp.config.window.bordered({
+					border = "single",
+					winhighlight = "Normal:CustomPmenu,FloatBorder:CustomPmenu,CursorLine:CustomPmenuSel,Search:None",
+				}),
+				completion = cmp.config.window.bordered({
+					border = "single",
+					winhighlight = "Normal:CustomPmenu,FloatBorder:CustomPmenu,CursorLine:CustomPmenuSel,Search:None",
+				}),
 			},
 			mapping = cmp.mapping.preset.insert({
 				['<C-b>'] = cmp.mapping.scroll_docs(-4),

@@ -21,12 +21,19 @@ f() {
   if [ -n "$TMUX" ]; then
     # tmux is running, open file in Vim directly
     file=$(fzf --preview 'bat --style=numbers --color=always {}' --preview-window=up:60%:wrap)
-    [ -n "$file" ] && nvim -c "cd $(dirname "$file")" "$file"
+    if [ -n "$file" ]; then
+      export FZF_DIR=$(dirname "$file")
+      nvim -c "cd \"$FZF_DIR\"" "$file"
+      cd "$FZF_DIR"  # Change directory after Neovim exits
+    fi
   else
-		# tmux is not running, run tmux and then call f 
-		file=$(fzf --preview 'bat --style=numbers --color=always {}' --preview-window=up:60%:wrap)
-    [ -n "$file" ] && tmux new-session -d "nvim -c 'cd $(dirname "$file")' '$file'" && tmux attach
-	fi
+    # tmux is not running, run tmux and then call f
+    file=$(fzf --preview 'bat --style=numbers --color=always {}' --preview-window=up:60%:wrap)
+    if [ -n "$file" ]; then
+      export FZF_DIR=$(dirname "$file")
+      tmux new-session -d "cd \"$FZF_DIR\"" && tmux attach 
+    fi
+  fi
 }
 
 # asdf shims aliases

@@ -156,21 +156,26 @@ gaps inner 0px
 focus_on_window_activation focus
 
 bar {
+	status_command /usr/bin/bumblebee-status \
+        -m sensors2 disk memory pipewire spotify weather time date \
+        -p time.format="%H:%M"  date.format="%d-%m-%Y" \
+        -t iceberg-dark-powerline
+	colors {
+        background #161820
+        statusline #ffffff
+        separator #666666
+
+        focused_workspace  #383e59 #1b1e2e #ffffff
+        active_workspace   #333333 #5f676a #ffffff
+        inactive_workspace #333333 #222222 #888888
+        urgent_workspace   #2f343a #900000 #ffffff
+        binding_mode       #2f343a #383e59 #ffffff
+  }
 	mode dock
 	modifier $mod
-	position top
-  status_command i3status
-	font pango:Iosevka NFP Regular 8
+	position bottom
+	font pango:Iosevka NFP Regular 11
 	separator_symbol "|"
-	workspace_buttons yes
-	i3bar_command i3bar --transparency
-	tray_output none
-	colors {
-		background #111111
-		statusline #f6f3e8
-		separator  #111111
-		focused_workspace.background #111111 #eb6f92
-	}
 }
 
 #bar in
@@ -178,17 +183,17 @@ bindsym $mod+shift+i exec "i3-msg bar mode dock"
 #bar out
 bindsym $mod+shift+o exec "i3-msg bar mode invisible"
 
-#class 									border	backgr.	text		ind.		child b.
-client.focused 				  #2a2e38 #2a2e38 #ffffff #2a2e38 #2a2e38 
-client.focused_inactive #111111 #111111 #f6f3e8 #111111 #111111 
-client.unfocused        #111111 #111111 #f6f3e8 #111111 #111111
-client.urgent           #900000 #900000 #111111 #900000 #900000
-client.placeholder      #111111 #111111 #f6f3e8 #111111 #111111 
-client.background       #111111
+#class 									 border	backgr.	text		ind.		child b.
+client.focused 				  #383e59 #383e59 #ffffff #383e59 #383e59 
+client.focused_inactive #1b1e2e #1b1e2e #f6f3e8 #1b1e2e #1b1e2e 
+client.unfocused        #1b1e2e #1b1e2e #f6f3e8 #1b1e2e #1b1e2e
+client.urgent           #900000 #900000 #1b1e2e #900000 #900000
+client.placeholder      #1b1e2e #1b1e2e #f6f3e8 #1b1e2e #1b1e2e 
+client.background       #1b1e2e
 
 # Border style
-default_border pixel 1
-default_floating_border pixel 1
+default_border pixel 2
+default_floating_border pixel 2
 
 #interactive screenshot by pressing printscreen
 bindsym Print exec gnome-screenshot -i 
