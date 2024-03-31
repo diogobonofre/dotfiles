@@ -38,6 +38,9 @@ map("v", ">", ">gv", opts)
 -- Persistent yank
 map("v", "p", "_dP", opts)
 
+-- Mapeamento para desativar o realce da pesquisa após pressionar Enter
+vim.api.nvim_set_keymap('n', '<CR>', ':nohlsearch<CR>', { noremap = true })
+
 -- NETRW
 vim.g.netrw_liststyle = 3
 vim.g.netrw_banner = 0

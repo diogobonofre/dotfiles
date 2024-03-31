@@ -63,45 +63,15 @@ return {
 			vim.fn.sign_define(hl, { text = icon, texthl = hl, numhl = "" })
 		end
 
-		lspconfig["tsserver"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
+		local servers = { "tsserver", "tailwindcss", "eslint", "html", "cssls", "clangd", "csharp_ls", "pyright", "lemminx",
+			"ast_grep" }
 
-		lspconfig["html"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-
-		lspconfig["cssls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-
-		lspconfig["clangd"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-
-		lspconfig["csharp_ls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-
-		lspconfig["jdtls"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-
-		lspconfig["pyright"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
-
-		lspconfig["lemminx"].setup({
-			capabilities = capabilities,
-			on_attach = on_attach,
-		})
+		for _, lsp in ipairs(servers) do
+			lspconfig[lsp].setup({
+				on_attach = on_attach,
+				capabilities = capabilities,
+			})
+		end
 
 		lspconfig["lua_ls"].setup({
 			capabilities = capabilities,

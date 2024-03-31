@@ -1,6 +1,6 @@
 export ZSH="$HOME/.oh-my-zsh"
 
-ZSH_THEME="robbyrussell"
+ZSH_THEME="evan"
 
 plugins=(asdf)
 
@@ -50,6 +50,8 @@ alias tokens="cat ~/Documents/tokens/github_tokens.txt"
 alias t="tty-clock -f %d-%m-%y -cC 3"
 alias mtx="unimatrix -c magenta"
 alias diskspace="df -h /dev/sdb7"
+alias ls='ls --color=never'
+alias tnc="tmux neww -c '$PWD'"
 
 source .xinitrc
 

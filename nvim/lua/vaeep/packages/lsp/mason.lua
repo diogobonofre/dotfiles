@@ -3,6 +3,14 @@ return {
 	dependencies = {
 		"williamboman/mason-lspconfig.nvim",
 	},
+	opts = {
+		ensure_installed = {
+			"eslint-lsp",
+			"prettierd",
+			"tailswindcss-language-server",
+			"typescript-language-server",
+		}
+	},
 	config = function()
 		require("mason").setup({
 			ui = {

@@ -1,60 +1,48 @@
+#import = ["/home/vaeep/dotfiles/alacritty/themes/themes/nord.toml"]
+
 [shell]
 program = "/bin/zsh"
 
 [window]
-decorations = "Full"
-padding = { x = 5 , y = 5}
+padding = { x = 0 , y = 0}
 opacity = 1
 
 [font]
-normal = { family = "Iosevka NFP", style = "Regular" }
-size = 20
-offset = { x = 0, y = 3 }
+normal = { family = "Iosevka Nerd Font Mono", style = "Medium" }
+size = 32
+offset = { x = 0, y = 2 }
 
 [cursor]
 style = { shape = "Block", blinking = "Always" }
-blink_interval = 350
+blink_interval = 800
 unfocused_hollow = true
 
 [mouse]
 hide_when_typing = true
 
+# Default colors
 [colors.primary]
-background = '#000000'
-foreground = '#e0def4'
+background = '#121212'
+foreground = '#ffffff'
 
-[colors.cursor]
-text = '#e0def4'
-cursor = '#524f67'
-
-[colors.vi_mode_cursor]
-text = '#e0def4'
-cursor = '#524f67'
-
-[colors.selection]
-text = '#e0def4'
-background = '#403d52'
-
+# Normal colors
 [colors.normal]
-black = '#26233a'
-red = '#eb6f92'
-green = '#31748f'
-yellow = '#f6c177'
-blue = '#9ccfd8'
-magenta = '#c4a7e7'
-cyan = '#ebbcba'
-white = '#e0def4'
+black   = '#282828'
+red     = '#333333'
+green   = '#95A99F'
+yellow  = '#FFCC22'
+blue    = '#96A6C8'
+magenta = '#888888'
+cyan    = '#BBBBBB'
+white   = '#EBEEEE'
 
+# Bright colors
 [colors.bright]
-black = '#6e6a86'
-red = '#eb6f92'
-green = '#31748f'
-yellow = '#f6c177'
-blue = '#9ccfd8'
-magenta = '#c4a7e7'
-cyan = '#ebbcba'
-white = '#e0def4'
-
-[colors.hints]
-start = {foreground = '#908caa', background = '#1f1d2e' }
-end = { foreground = '#6e6a86', background = '#1f1d2e' }
+black   = '#282828'
+red     = '#333333'
+green   = '#95A99F'
+yellow  = '#FFCC22'
+blue    = '#96A6C8'
+magenta = '#888888'
+cyan    = '#BBBBBB'
+white   = '#EBEEEE'

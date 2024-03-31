@@ -25,7 +25,7 @@ set.cursorlineopt = "number"
 set.guicursor = "n-v-c-sm-i-ci-ve-r-cr-o:block"
 set.mousehide = true
 
-set.rulerformat = "米"
+--set.rulerformat = "米"
 
 set.shiftwidth = 2
 set.tabstop = 2
