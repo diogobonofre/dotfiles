@@ -25,6 +25,9 @@
 - [[#prog-modes][PROG-MODES]]
 - [[#terminal][TERMINAL]]
   - [[#setting-vterm][Setting Vterm]]
+- [[#external-connections][EXTERNAL CONNECTIONS]]
+  - [[#discord-rich-presence][Discord Rich Presence]]
+  - [[#wakatime][Wakatime]]
 
 * INTRODUCTION
 * BOOT-TIME APPLICATIONS
@@ -142,16 +145,16 @@ This allows us to open files with sudo privileges even if we initially opened th
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
                       :font "Iosevka NFP"
-                      :height 200
+                      :height 180
                       :weight 'medium)
   ;; Variable-pitch is used in the web browser
   (set-face-attribute 'variable-pitch nil
                       :font "Iosevka NFP"
-                      :height 200
+                      :height 180
                       :weight 'medium)
   (set-face-attribute 'variable-pitch nil
                       :font "Iosevka NFP"
-                      :height 200
+                      :height 180
                       :weight 'medium)
   (setq-default line-spacing 0.12)
 #+END_SRC
@@ -187,6 +190,8 @@ This allows us to open files with sudo privileges even if we initially opened th
 - doom-wilmersdorf
 - doom-pine
 - doom-sourcerer
+*** Related
+[[https://arxiv.org/pdf/2008.06030.pdf][On The Design of Text Editors - Nicolas P. Rougier]]
 * ORG-MODE
 ** Enabling Table of Contents
 #+BEGIN_SRC emacs-lisp
@@ -244,6 +249,26 @@ Also setting vterm-toggle so I can open easily to execute minor tasks inside of 
                 ;;(dedicated . t) ;dedicated is supported in emacs27
                 (reusable-frames . visible)
                 (window-height . 0.3))))
+#+END_SRC
+
+#+RESULTS:
+* EXTERNAL CONNECTIONS
+** Discord Rich Presence
+#+BEGIN_SRC emacs-lisp
+  (use-package elcord
+    :ensure t
+    :config
+    (elcord-mode))
+#+END_SRC
+
+#+RESULTS:
+
+** Wakatime
+#+BEGIN_SRC emacs-lisp
+  (use-package wakatime-mode
+    :ensure t
+    :config
+    (global-wakatime-mode))
 #+END_SRC
 
 #+RESULTS:
