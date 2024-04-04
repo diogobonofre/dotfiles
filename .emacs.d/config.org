@@ -12,16 +12,19 @@
 - [[#quality-of-life-tweaks][QUALITY OF LIFE TWEAKS]]
   - [[#reload-init-file][Reload Init File]]
   - [[#sudo-edit][Sudo Edit]]
+  - [[#setting-rainbow-mode][Setting Rainbow Mode]]
 - [[#graphical-user-interface][GRAPHICAL USER INTERFACE]]
   - [[#disable-menubar-toolbar-and-scrollbar][Disable Menubar, Toolbar and Scrollbar]]
   - [[#display-relative-line-numbers][Display Relative Line Numbers]]
-  - [[#setting-font-face][Setting Font Face]]
+  - [[#setting-font-faces][Setting Font Faces]]
   - [[#setting-themes][Setting Themes]]
 - [[#org-mode][ORG-MODE]]
   - [[#enabling-table-of-contents][Enabling Table of Contents]]
   - [[#enabling-org-bullets][Enabling Org Bullets]]
   - [[#disable-electric-indent][Disable Electric Indent]]
 - [[#prog-modes][PROG-MODES]]
+- [[#terminal][TERMINAL]]
+  - [[#setting-vterm][Setting Vterm]]
 
 * INTRODUCTION
 * BOOT-TIME APPLICATIONS
@@ -81,6 +84,13 @@
 - [[https://github.com/progfolio/elpaca?tab=readme-ov-file#fn.2][Elpaca Repository]]
 - [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Early-Init-File.html][Early Init File]]
 ** General Keybindings
+#+BEGIN_SRC emacs-lisp
+  (use-package general
+    :ensure t)
+#+END_SRC
+
+#+RESULTS:
+
 * QUALITY OF LIFE TWEAKS
 ** Reload Init File
 #+BEGIN_SRC emacs-lisp
@@ -97,6 +107,14 @@ This allows us to open files with sudo privileges even if we initially opened th
 #+BEGIN_SRC emacs-lisp
   (use-package sudo-edit 
     :ensure t)
+#+END_SRC
+
+#+RESULTS:
+** Setting Rainbow Mode
+#+BEGIN_SRC emacs-lisp
+  (use-package rainbow-mode
+    :ensure t
+    :hook org-mode prog-mode)
 #+END_SRC
 
 #+RESULTS:
@@ -120,7 +138,7 @@ This allows us to open files with sudo privileges even if we initially opened th
 #+RESULTS:
 : relative
 
-** Setting Font Face
+** Setting Font Faces
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
                       :font "Iosevka NFP"
@@ -197,3 +215,35 @@ This allows us to open files with sudo privileges even if we initially opened th
 
 #+RESULTS:
 * PROG-MODES
+* TERMINAL
+** Setting Vterm
+#+BEGIN_SRC emacs-lisp
+  (use-package vterm
+    :ensure t
+    :config
+    (setq shell-file-name "/bin/bash"
+          vterm-max-scrollback 5000))
+#+END_SRC
+Also setting vterm-toggle so I can open easily to execute minor tasks inside of it without leaving the current buffer.
+#+BEGIN_SRC emacs-lisp
+  (use-package vterm-toggle
+    :ensure t  
+    :after vterm
+    :config
+    (setq vterm-toggle-fullscreen-p nil)
+    (add-to-list 'display-buffer-alist
+             '((lambda (buffer-or-name _)
+                   (let ((buffer (get-buffer buffer-or-name)))
+                     (with-current-buffer buffer
+                       (or (equal major-mode 'vterm-mode)
+                           (string-prefix-p vterm-buffer-name (buffer-name buffer))))))
+                (display-buffer-reuse-window display-buffer-at-bottom)
+                ;;(display-buffer-reuse-window display-buffer-in-direction)
+                ;;display-buffer-in-direction/direction/dedicated is added in emacs27
+                ;;(direction . bottom)
+                ;;(dedicated . t) ;dedicated is supported in emacs27
+                (reusable-frames . visible)
+                (window-height . 0.3))))
+#+END_SRC
+
+#+RESULTS:
