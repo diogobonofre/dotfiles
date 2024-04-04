@@ -1,4 +1,5 @@
 */plugin
 .emacs.d/*
+!.emacs.d/early-init.el
 !.emacs.d/init.el
-!.emacs.d/plateau-theme.el
+!.emacs.d/config.org

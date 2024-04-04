@@ -4,4 +4,4 @@
 [init]
 	defaultBranch = master
 [core]
-	editor = nvim
+	editor = emacs
