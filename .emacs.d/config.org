@@ -9,6 +9,9 @@
 - [[#boot-time-applications][BOOT-TIME APPLICATIONS]]
   - [[#setting-package-manager][Setting Package Manager]]
   - [[#general-keybindings][General Keybindings]]
+- [[#quality-of-life-tweaks][QUALITY OF LIFE TWEAKS]]
+  - [[#reload-init-file][Reload Init File]]
+  - [[#sudo-edit][Sudo Edit]]
 - [[#graphical-user-interface][GRAPHICAL USER INTERFACE]]
   - [[#disable-menubar-toolbar-and-scrollbar][Disable Menubar, Toolbar and Scrollbar]]
   - [[#display-relative-line-numbers][Display Relative Line Numbers]]
@@ -17,58 +20,59 @@
 - [[#org-mode][ORG-MODE]]
   - [[#enabling-table-of-contents][Enabling Table of Contents]]
   - [[#enabling-org-bullets][Enabling Org Bullets]]
+  - [[#disable-electric-indent][Disable Electric Indent]]
 - [[#prog-modes][PROG-MODES]]
 
 * INTRODUCTION
 * BOOT-TIME APPLICATIONS
 ** Setting Package Manager
 #+BEGIN_SRC emacs-lisp
-  (defvar elpaca-installer-version 0.7)
-  (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
-  (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
-  (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
-  (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
-				:ref nil :depth 1
-				:files (:defaults "elpaca-test.el" (:exclude "extensions"))
-				:build (:not elpaca--activate-package)))
-  (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
-	 (build (expand-file-name "elpaca/" elpaca-builds-directory))
-	 (order (cdr elpaca-order))
-	 (default-directory repo))
-    (add-to-list 'load-path (if (file-exists-p build) build repo))
-    (unless (file-exists-p repo)
-      (make-directory repo t)
-      (when (< emacs-major-version 28) (require 'subr-x))
-      (condition-case-unless-debug err
-	  (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
-		   ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
-						   ,@(when-let ((depth (plist-get order :depth)))
-						       (list (format "--depth=%d" depth) "--no-single-branch"))
-						   ,(plist-get order :repo) ,repo))))
-		   ((zerop (call-process "git" nil buffer t "checkout"
-					 (or (plist-get order :ref) "--"))))
-		   (emacs (concat invocation-directory invocation-name))
-		   ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
-					 "--eval" "(byte-recompile-directory \".\" 0 'force)")))
-		   ((require 'elpaca))
-		   ((elpaca-generate-autoloads "elpaca" repo)))
-	      (progn (message "%s" (buffer-string)) (kill-buffer buffer))
-	    (error "%s" (with-current-buffer buffer (buffer-string))))
-	((error) (warn "%s" err) (delete-directory repo 'recursive))))
-    (unless (require 'elpaca-autoloads nil t)
-      (require 'elpaca)
-      (elpaca-generate-autoloads "elpaca" repo)
-      (load "./elpaca-autoloads")))
-  (add-hook 'after-init-hook #'elpaca-process-queues)
-  (elpaca `(,@elpaca-order))
+    (defvar elpaca-installer-version 0.7)
+    (defvar elpaca-directory (expand-file-name "elpaca/" user-emacs-directory))
+    (defvar elpaca-builds-directory (expand-file-name "builds/" elpaca-directory))
+    (defvar elpaca-repos-directory (expand-file-name "repos/" elpaca-directory))
+    (defvar elpaca-order '(elpaca :repo "https://github.com/progfolio/elpaca.git"
+                                  :ref nil :depth 1
+                                  :files (:defaults "elpaca-test.el" (:exclude "extensions"))
+                                  :build (:not elpaca--activate-package)))
+    (let* ((repo  (expand-file-name "elpaca/" elpaca-repos-directory))
+           (build (expand-file-name "elpaca/" elpaca-builds-directory))
+           (order (cdr elpaca-order))
+           (default-directory repo))
+      (add-to-list 'load-path (if (file-exists-p build) build repo))
+      (unless (file-exists-p repo)
+        (make-directory repo t)
+        (when (< emacs-major-version 28) (require 'subr-x))
+        (condition-case-unless-debug err
+            (if-let ((buffer (pop-to-buffer-same-window "*elpaca-bootstrap*"))
+                     ((zerop (apply #'call-process `("git" nil ,buffer t "clone"
+                                                     ,@(when-let ((depth (plist-get order :depth)))
+                                                         (list (format "--depth=%d" depth) "--no-single-branch"))
+                                                     ,(plist-get order :repo) ,repo))))
+                     ((zerop (call-process "git" nil buffer t "checkout"
+                                           (or (plist-get order :ref) "--"))))
+                     (emacs (concat invocation-directory invocation-name))
+                     ((zerop (call-process emacs nil buffer nil "-Q" "-L" "." "--batch"
+                                           "--eval" "(byte-recompile-directory \".\" 0 'force)")))
+                     ((require 'elpaca))
+                     ((elpaca-generate-autoloads "elpaca" repo)))
+                (progn (message "%s" (buffer-string)) (kill-buffer buffer))
+              (error "%s" (with-current-buffer buffer (buffer-string))))
+          ((error) (warn "%s" err) (delete-directory repo 'recursive))))
+      (unless (require 'elpaca-autoloads nil t)
+        (require 'elpaca)
+        (elpaca-generate-autoloads "elpaca" repo)
+        (load "./elpaca-autoloads")))
+    (add-hook 'after-init-hook #'elpaca-process-queues)
+    (elpaca `(,@elpaca-order))
 
-;; Install use-package support
-(elpaca elpaca-use-package
-  ;; Enable use-package :ensure support for Elpaca.
-  (elpaca-use-package-mode))
+  ;; Install use-package support
+  (elpaca elpaca-use-package
+    ;; Enable use-package :ensure support for Elpaca.
+    (elpaca-use-package-mode))
 
-;; Block until current queue processed.
-(elpaca-wait)
+  ;; Block until current queue processed.
+  (elpaca-wait)
 #+END_SRC
 
 #+RESULTS:
@@ -77,6 +81,26 @@
 - [[https://github.com/progfolio/elpaca?tab=readme-ov-file#fn.2][Elpaca Repository]]
 - [[https://www.gnu.org/software/emacs/manual/html_node/emacs/Early-Init-File.html][Early Init File]]
 ** General Keybindings
+* QUALITY OF LIFE TWEAKS
+** Reload Init File
+#+BEGIN_SRC emacs-lisp
+  (defun reload-init-file ()
+    (interactive)
+    (load-file user-init-file)
+    (load-file user-init-file))
+#+END_SRC
+
+#+RESULTS:
+: reload-init-file
+** Sudo Edit
+This allows us to open files with sudo privileges even if we initially opened the file without such privileges.
+#+BEGIN_SRC emacs-lisp
+  (use-package sudo-edit 
+    :ensure t)
+#+END_SRC
+
+#+RESULTS:
+
 * GRAPHICAL USER INTERFACE
 ** Disable Menubar, Toolbar and Scrollbar
 #+BEGIN_SRC emacs-lisp
@@ -90,27 +114,27 @@
 ** Display Relative Line Numbers
 #+BEGIN_SRC emacs-lisp
   (global-display-line-numbers-mode 1)
-  (global-visual-line-mode 1)
+  (setq display-line-numbers-type 'relative)
 #+END_SRC
 
 #+RESULTS:
-: t
+: relative
 
 ** Setting Font Face
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
-		      :font "Iosevka NFP"
-		      :height 200
-		      :weight 'medium)
+                      :font "Iosevka NFP"
+                      :height 200
+                      :weight 'medium)
   ;; Variable-pitch is used in the web browser
   (set-face-attribute 'variable-pitch nil
-		      :font "Iosevka NFP"
-		      :height 200
-		      :weight 'medium)
+                      :font "Iosevka NFP"
+                      :height 200
+                      :weight 'medium)
   (set-face-attribute 'variable-pitch nil
-		      :font "Iosevka NFP"
-		      :height 200
-		      :weight 'medium)
+                      :font "Iosevka NFP"
+                      :height 200
+                      :weight 'medium)
   (setq-default line-spacing 0.12)
 #+END_SRC
 
@@ -125,9 +149,9 @@
   :config
   ;; Global settings (defaults)
   (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-	doom-themes-enable-italic t) ; if nil, italics is universally disabled
+        doom-themes-enable-italic t) ; if nil, italics is universally disabled
   ;; Set the theme
-  (load-theme 'doom-wilmersdorf)
+  (load-theme 'doom-earl-grey)
   ;; Corrects (and improves) org-mode's native fontification.
   (doom-themes-org-config))
 
@@ -166,4 +190,10 @@
 #+RESULTS:
 | (lambda nil (org-bullets-mode 1)) | org-indent-mode | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-fold-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes |
 
+** Disable Electric Indent
+#+BEGIN_SRC emacs-lisp
+  (electric-indent-mode -1)
+#+END_SRC
+
+#+RESULTS:
 * PROG-MODES
