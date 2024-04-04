@@ -92,8 +92,6 @@ set $ws8 "8"
 set $ws9 "9"
 set $ws10 "10"
 
-workspace_layout tabbed
-
 # switch to workspace
 bindsym $mod+1 workspace number $ws1
 bindsym $mod+2 workspace number $ws2
@@ -144,7 +142,7 @@ mode "resize" {
 
 bindsym $mod+r mode "resize"
 
-gaps inner 0px
+gaps inner 15px
 focus_on_window_activation focus
 
 bar {
@@ -183,8 +181,8 @@ client.placeholder      #121212 #121212 #555555 #121212 #121212
 client.background       #121212
 
 # Border style
-default_border pixel 2
-default_floating_border pixel 2
+default_border pixel 0
+default_floating_border pixel 0
 
 #interactive screenshot by pressing printscreen
 bindsym Print exec gnome-screenshot -i 
@@ -201,16 +199,16 @@ bindsym $mod+Shift+period exec systemctl suspend
 assign [class="discord"] $ws5
 assign [class="Spotify"] $ws4
 assign [class="firefox"] $ws1
-assign [class="Alacritty"] $ws6
 assign [class="obsidian"] $ws3
-assign [class="zathura"] $ws3
+assign [class="alacritty"] $ws6
+assign [class="Zathura"] $ws3
 assign [class="Emacs"] $ws2
 exec --no-startup-id discord
 exec --no-startup-id emacs
 exec --no-startup-id zathura
 exec --no-startup-id spotify-launcher 
 exec --no-startup-id firefox
-exec --no-startup-id alacritty
 exec --no-startup-id obsidian
 exec --no-startup-id syncthing
+exec --no-startup-id alacritty
 exec --no-startup-id picom -b --transparent-clipping
