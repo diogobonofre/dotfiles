@@ -131,6 +131,8 @@
     (interactive)
     (load-file user-init-file)
     (load-file user-init-file))
+
+  (global-set-key (kbd "C-x C-e") 'reload-init-file)
 #+END_SRC
 
 #+RESULTS:
@@ -210,7 +212,7 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
     (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
 	  doom-themes-enable-italic t) ; if nil, italics is universally disabled
     ;; Set the theme
-    ;;(load-theme 'moe-dark)
+    (load-theme 'doom-one)
     ;; Corrects (and improves) org-mode's native fontification.
     (doom-themes-org-config))
 
@@ -223,13 +225,10 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
   ;; Standalone Themes
   (use-package gruber-darker-theme :ensure t)
   (use-package distinguished-theme :ensure t)
-  (use-package moe-theme
-    :ensure t
-    :init (load-theme 'moe-dark))
+  (use-package moe-theme :ensure t)
 #+END_SRC
 
 #+RESULTS:
-: t
 
 *** Favorite Themes
 **** Light
