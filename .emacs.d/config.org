@@ -47,9 +47,9 @@
 - [[#others][OTHERS]]
   - [[#app-launcher][App Launcher]]
 
-*** TODO CONFIG.ORG [0/13]
-- [ ] Setup Vertico
-- [ ] Setup Marginalia
+*** TODO CONFIG.ORG [2/14]
+- [X] Setup Vertico
+- [X] Setup Marginalia
 - [ ] Improve todo list, tasks and reminders in general
 - [ ] Create daily notes automatizations and templates
 - [ ] Version Control of my notes
@@ -61,6 +61,8 @@
 - [ ] Setup a good Git workflow
 - [ ] Create keybindings for vterm-toggle
 - [ ] Add directories to org-agenda recursively
+- [ ] Think about a good way to structure my note system
+- [ ] Centralize all my own keybindings inside one code block using general package
 * INTRODUCTION
 * BOOT-TIME APPLICATIONS
 ** Setting Package Manager
@@ -175,12 +177,18 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
 #+RESULTS:
 ** Display Relative Line Numbers
 #+BEGIN_SRC emacs-lisp
-  (global-display-line-numbers-mode 1)
-  (setq display-line-numbers-type 'relative)
+  (defun display-line-numbers-hook ()
+    (display-line-numbers-mode 1)
+    (setq display-line-numbers 'relative
+      display-line-numbers-current-absolute t))
+
+  (add-hook 'prog-mode-hook 'display-line-numbers-hook)
+  (add-hook 'org-mode-hook 'display-line-numbers-hook)
+  (add-hook 'text-mode-hook 'display-line-numbers-hook)
 #+END_SRC
 
 #+RESULTS:
-: relative
+| display-line-numbers-hook | text-mode-hook-identify |
 
 ** Setting Font Faces
 #+BEGIN_SRC emacs-lisp
@@ -210,9 +218,9 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
     :config
     ;; Global settings (defaults)
     (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
-	  doom-themes-enable-italic t) ; if nil, italics is universally disabled
+          doom-themes-enable-italic t) ; if nil, italics is universally disabled
     ;; Set the theme
-    (load-theme 'doom-one)
+    (load-theme 'zenburn)
     ;; Corrects (and improves) org-mode's native fontification.
     (doom-themes-org-config))
 
@@ -226,6 +234,7 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
   (use-package gruber-darker-theme :ensure t)
   (use-package distinguished-theme :ensure t)
   (use-package moe-theme :ensure t)
+  (use-package sublime-themes :ensure t)
 #+END_SRC
 
 #+RESULTS:
@@ -310,6 +319,8 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
     :ensure t
     :init
     (setq initial-buffer-choice 'dashboard-open)
+    (setq dashboard-startup-banner 'logo)
+    (setq dashboard-banner-logo-title "Welcome to the Church of Emacs")
     (setq dashboard-set-heading-icons t)
     (setq dashboard-set-file-icons t)
     (setq dashboard-center-content t)
@@ -550,10 +561,12 @@ Also setting vterm-toggle so I can open easily to execute minor tasks inside of 
                 ;;(direction . bottom)
                 ;;(dedicated . t) ;dedicated is supported in emacs27
                 (reusable-frames . visible)
-                (window-height . 0.3))))
+                (window-height . 0.5))))
+  (global-set-key (kbd "C-x C-t") 'vterm-toggle)
 #+END_SRC
 
 #+RESULTS:
+: vterm-toggle
 * GIT
 ** Projectile
 Helps interacting with projects (any versioned directory) inside Emacs.
