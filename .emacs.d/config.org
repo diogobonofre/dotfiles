@@ -19,21 +19,30 @@
   - [[#display-relative-line-numbers][Display Relative Line Numbers]]
   - [[#setting-font-faces][Setting Font Faces]]
   - [[#setting-themes][Setting Themes]]
+  - [[#highlight-numbers][Highlight Numbers]]
   - [[#setting-custom-mode-line][Setting Custom Mode-Line]]
+  - [[#dired-preview][Dired Preview]]
+  - [[#cliplink][Cliplink]]
   - [[#icons][Icons]]
   - [[#dashboard][Dashboard]]
 - [[#org-mode][ORG-MODE]]
+  - [[#org-roam][Org-Roam]]
   - [[#enabling-table-of-contents][Enabling Table of Contents]]
   - [[#enabling-org-bullets][Enabling Org Bullets]]
   - [[#disable-electric-indent][Disable Electric Indent]]
+  - [[#ensures-visual-line-mode-in-org][Ensures Visual Line Mode in Org]]
   - [[#org-agenda][Org-agenda]]
+  - [[#el-draw][El-draw]]
   - [[#set-default-file-apps][Set Default File Apps]]
-- [[#prog-modes][PROG-MODES]]
+- [[#prog-mode][PROG-MODE]]
   - [[#flycheck][Flycheck]]
   - [[#corfu][Corfu]]
   - [[#cape][Cape]]
   - [[#dabbrev][Dabbrev]]
   - [[#orderless][Orderless]]
+  - [[#code-formatter][Code Formatter]]
+  - [[#electric-pair-mode][Electric Pair Mode]]
+  - [[#cc][C/C++]]
 - [[#mini-buffer][MINI-BUFFER]]
   - [[#vertico][Vertico]]
   - [[#marginalia][Marginalia]]
@@ -45,11 +54,15 @@
   - [[#discord-rich-presence][Discord Rich Presence]]
   - [[#wakatime][Wakatime]]
 - [[#others][OTHERS]]
+  - [[#desktop-save][Desktop Save]]
   - [[#app-launcher][App Launcher]]
+  - [[#pdf-tools][PDF Tools]]
 
-*** TODO CONFIG.ORG [2/14]
+*** TODO CONFIG.ORG [3/16]
 - [X] Setup Vertico
 - [X] Setup Marginalia
+- [ ] Create theme based on Fogus
+- [ ] Set the offset for lines 
 - [ ] Improve todo list, tasks and reminders in general
 - [ ] Create daily notes automatizations and templates
 - [ ] Version Control of my notes
@@ -59,10 +72,11 @@
 - [ ] Make the configuration easily extensible for new languages
 - [ ] Excalidraw integration with Org
 - [ ] Setup a good Git workflow
-- [ ] Create keybindings for vterm-toggle
+- [X] Create keybindings for vterm-toggle
 - [ ] Add directories to org-agenda recursively
 - [ ] Think about a good way to structure my note system
 - [ ] Centralize all my own keybindings inside one code block using general package
+- [ ] Eletric Pair Mode
 * INTRODUCTION
 * BOOT-TIME APPLICATIONS
 ** Setting Package Manager
@@ -174,7 +188,6 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
   (scroll-bar-mode 0)
 #+END_SRC
 
-#+RESULTS:
 ** Display Relative Line Numbers
 #+BEGIN_SRC emacs-lisp
   (defun display-line-numbers-hook ()
@@ -193,16 +206,16 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
 ** Setting Font Faces
 #+BEGIN_SRC emacs-lisp
   (set-face-attribute 'default nil
-                      :font "Iosevka NFP"
+                      :font "Iosevka NFM"
                       :height 180
                       :weight 'medium)
   ;; Variable-pitch is used in the web browser
   (set-face-attribute 'variable-pitch nil
-                      :font "Iosevka NFP"
+                      :font "Iosevka NFM"
                       :height 180
                       :weight 'medium)
   (set-face-attribute 'fixed-pitch nil
-                      :font "Iosevka NFP"
+                      :font "Iosevka NFM"
                       :height 180
                       :weight 'medium)
   (setq-default line-spacing 0.0)
@@ -212,16 +225,16 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
 : 0.0
 ** Setting Themes
 #+BEGIN_SRC emacs-lisp
-  ;; Doom Emacs Themes
+  ;; doom emacs themes
   (use-package doom-themes
     :ensure t
     :config
-    ;; Global settings (defaults)
+    ;; global settings (defaults)
     (setq doom-themes-enable-bold t    ; if nil, bold is universally disabled
           doom-themes-enable-italic t) ; if nil, italics is universally disabled
-    ;; Set the theme
-    (load-theme 'zenburn)
-    ;; Corrects (and improves) org-mode's native fontification.
+    ;; set the theme
+    (load-theme 'ef-bio)
+    ;; corrects (and improves) org-mode's native fontification.
     (doom-themes-org-config))
 
   (use-package lambda-themes :ensure (:host github :repo "lambda-emacs/lambda-themes")
@@ -230,34 +243,39 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
     (lambda-themes-set-italic-keywords t)
     (lambda-themes-set-variable-pitch t)) 
 
-  ;; Standalone Themes
+  (use-package ef-themes :ensure t)
+
+  (use-package kaolin-themes :ensure t)
+
+  (use-package sublime-themes :ensure t)
+
+  ;; standalone themes
   (use-package gruber-darker-theme :ensure t)
   (use-package distinguished-theme :ensure t)
   (use-package moe-theme :ensure t)
-  (use-package sublime-themes :ensure t)
+  (use-package tao-theme :ensure t)
 #+END_SRC
 
 #+RESULTS:
 
-*** Favorite Themes
-**** Light
-- doom-earl-grey
-- doom-plain
-**** Dark
-- doom-wilmersdorf
-- doom-pine
-- doom-sourcerer
-- doom-Iosevkm
-- doom-miramare
-- doom-henna
 *** Related
-[[https://arxiv.org/pdf/2008.06030.pdf][On The Design of Text Editors - Nicolas P. Rougier]]
+[[Https://arxiv.org/pdf/2008.06030.pdf][On The Design Of Text Editors - Nicolas P. Rougier]]
+** Highlight Numbers
+#+BEGIN_SRC emacs-lisp
+  (use-package highlight-numbers
+    :ensure t
+    :init
+    (add-hook 'prog-mode-hook 'highlight-numbers-mode))
+#+END_SRC
+
+#+RESULTS:
+
 ** Setting Custom Mode-Line
 #+BEGIN_SRC emacs-lisp
   (use-package lambda-line 
     :ensure (:host github :repo "lambda-emacs/lambda-line")
     :custom
-      (lambda-line-position 'bottom) ;; Set position of status-line 
+      (lambda-line-position 'bottom) ;; set position of status-line 
       (lambda-line-abbrev t) ;; abbreviate major modes
       (lambda-line-hspace "  ")  ;; add some cushion
       (lambda-line-prefix t) ;; use a prefix symbol
@@ -270,7 +288,7 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
       (lambda-line-space-bottom -.0)
       (lambda-line-symbol-position 0) ;; adjust the vertical placement of symbol
       :config
-      ;; DISABLED
+      ;; disabled
       ;; (lambda-line-mode) 
       ;; set divider line in footer
       (when (eq lambda-line-position 'top)
@@ -280,7 +298,7 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
   (use-package doom-modeline
     :ensure t
     :init
-    (setq doom-modeline-height 40)
+    (setq doom-modeline-height 20)
     (setq doom-modeline-project-detection 'auto)
     (setq doom-modeline-icon t)
     (setq doom-modeline-buffer-file-name-style 'auto)
@@ -288,14 +306,55 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
     (setq doom-modeline-lsp-icon t)
     (setq doom-modeline-buffer-modification-icon t)
     (setq doom-modeline-minor-modes nil)
-    (setq doom-modeline-env-version t))
+    (setq doom-modeline-env-version t)
     ;; DISABLED
-    ;;(doom-modeline-mode 1))
+    (doom-modeline-mode 1))
  #+END_SRC
 
 #+RESULTS:
-*** Related
-- [[https://github.com/progfolio/elpaca/blob/master/doc/manual.md#use-package-integration][Elpaca Install Packages from Repositories]]
+*** related
+- [[https://github.com/progfolio/elpaca/blob/master/doc/manual.md#use-package-integration][elpaca install packages from repositories]]
+** Dired Preview
+#+BEGIN_SRC emacs-lisp
+  (use-package dired-preview
+    :ensure t)
+
+  ;; Default values for demo purposes
+  (setq dired-preview-delay 0.0)
+  (setq dired-preview-max-size (expt 2 20))
+  (setq dired-preview-ignored-extensions-regexp
+        (concat "\\."
+                "\\(mkv\\|webm\\|mp4\\|mp3\\|ogg\\|m4a"
+                "\\|gz\\|zst\\|tar\\|xz\\|rar\\|zip"
+                "\\|iso\\|epub\\|pdf\\)"))
+
+  (defun my-dired-preview-to-the-right ()
+    "My preferred `dired-preview-display-action-alist-function'."
+    '((display-buffer-in-side-window)
+      (side . right)
+      (width . 0.5)))
+
+  (setq dired-preview-display-action-alist-function #'my-dired-preview-to-the-right)
+
+  (add-hook 'dired-mode-hook 'dired-preview-mode 1)
+#+END_SRC
+
+#+RESULTS:
+| all-the-icons-dired-mode | dired-preview-mode |
+*** related
+- [[https://protesilaos.com/emacs/dired-preview][Dired Preview (dired-preview.el) | Protesilaos Stavrou]]
+** Cliplink
+#+BEGIN_SRC emacs-lisp
+  (use-package org-cliplink
+    :ensure t)
+
+  (global-set-key (kbd "C-x p i") 'org-cliplink)
+#+END_SRC
+
+#+RESULTS:
+: org-cliplink
+*** related
+- [[https://github.com/rexim/org-cliplink][GitHub - rexim/org-cliplink: Insert org-mode links from clipboard]]
 ** Icons
 #+BEGIN_SRC emacs-lisp
   (use-package all-the-icons
@@ -335,43 +394,80 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
 #+RESULTS:
 
 * ORG-MODE
+** Org-Roam
+#+begin_src emacs-lisp
+  (use-package org-roam
+    :ensure t
+    :diminish
+    :init
+    (setq org-roam-directory (file-truename "~/notes/"))
+    (org-roam-db-autosync-mode)
+    :config
+    (setq org-roam-node-display-template
+      (concat "${title:*} "
+              (propertize "${tags:50}" 'face 'org-tag)))
+    :bind (("C-c r b" . org-roam-buffer-toggle)
+           ("C-c r f" . org-roam-node-find)
+           ("C-c r i" . org-roam-node-insert)))
+
+  ;; Also will set org-roam-ui for the graphs
+  (use-package org-roam-ui
+    :ensure t
+    :diminish
+    :after org-roam
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+#+end_src
+
+#+RESULTS:
+
 ** Enabling Table of Contents
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (use-package toc-org
     :ensure t
     :commands toc-org-enable
     :init (add-hook 'org-mode-hook 'toc-org-enable))
-#+END_SRC
-
-#+RESULTS:
+#+end_src
 ** Enabling Org Bullets
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (add-hook 'org-mode-hook (lambda () (org-indent-mode 1)))
   (use-package org-bullets :ensure t)
   (add-hook 'org-mode-hook (lambda () (org-bullets-mode 1))) 
-#+END_SRC
+#+end_src
 
 #+RESULTS:
-| (lambda nil (org-indent-mode 1)) | org-indent-mode | toc-org-enable | rainbow-mode | (lambda nil (org-bullets-mode 1)) | t | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-fold-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes |
+| toc-org-enable | rainbow-mode | (lambda nil (visual-line-mode 1)) | (lambda nil (org-bullets-mode 1)) | (lambda nil (org-indent-mode 1)) | display-line-numbers-hook | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-fold-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes |
 ** Disable Electric Indent
-#+BEGIN_SRC emacs-lisp
+#+begin_src emacs-lisp
   (electric-indent-mode -1)
   (setq org-edit-src-content-indentation 2)
+#+end_src
+** Ensures Visual Line Mode in Org
+#+BEGIN_SRC emacs-lisp
+  (add-hook 'org-mode-hook (lambda () (visual-line-mode 1)))
 #+END_SRC
 
 #+RESULTS:
-: 2
+| (lambda nil (visual-line-mode 1)) | #[0 \301\211\207 [imenu-create-index-function org-imenu-get-tree] 2] | toc-org-enable | rainbow-mode | (lambda nil (org-bullets-mode 1)) | (lambda nil (org-indent-mode 1)) | display-line-numbers-hook | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-fold-show-all append local] 5] | #[0 \300\301\302\303\304$\207 [add-hook change-major-mode-hook org-babel-show-result-all append local] 5] | org-babel-result-hide-spec | org-babel-hide-all-hashes |
+
 ** Org-agenda
 #+begin_src emacs-lisp
   ;; Need to add all subdirectories from ~/notes/ in order to work properly with org-agenda
   (setq org-agenda-files '("~/notes/"
-                           "~/notes/f2024/"
-                           "~/.emacs.d/config.org"))
+                           "~/notes/f2024/"))
   (setq org-agenda-span 14)
 #+end_src
 
 #+RESULTS:
-: 10
+: 14
+** El-draw
+#+BEGIN_SRC emacs-lisp
+
+#+END_SRC
+
 ** Set Default File Apps
 #+begin_src emacs-lisp
   (add-to-list 'org-file-apps '("\\.pdf" . "zathura %s"))
@@ -379,7 +475,7 @@ This package hide minor modes abbreviations. You can :diminish to use-package bl
 
 #+RESULTS:
 : ((.pdf' . zathura %s) (\.pdf . zathura %s) (auto-mode . emacs) (directory . emacs) (\.mm\' . default) (\.x?html?\' . default) (\.pdf\' . default))
-* PROG-MODES
+* PROG-MODE
 A modern on-the-fly syntax checking extension.
 ** Flycheck
 #+BEGIN_SRC emacs-lisp
@@ -469,7 +565,46 @@ Provides more completion backends for Corfu.
 #+END_SRC
 
 #+RESULTS:
+** Code Formatter
+#+BEGIN_SRbC emacs-lisp
+  (use-package format-all
+    :ensure t
+    :diminish
+    :commands format-all-mode
+    :hook (prog-mode . format-all-mode))
+#+END_SRC
 
+#+RESULTS:
+*** Related
+- [[https://github.com/lassik/emacs-format-all-the-code][GitHub - lassik/emacs-format-all-the-code]]
+** Electric Pair Mode
+#+BEGIN_SRC emacs-lisp
+  (electric-pair-mode t)
+#+END_SRC
+
+#+RESULTS:
+: t
+
+*** Related
+- [[info:emacs#Matching][Emacs - Matching Parentheses]]
+** C/C++
+#+BEGIN_SRC emacs-lisp
+  ;; Formatter config
+  (add-hook 'c-mode-hook
+            (lambda ()
+              (setq format-all-formatters
+                    '(("C" (clang-format "--style=Google -i"))))))
+
+  (add-hook 'c++-mode-hook
+            (lambda ()
+              (setq format-all-formatters
+                    '(("C++" (clang-format "--style=Google -i"))))))
+
+
+#+END_SRC
+
+#+RESULTS:
+| lambda | nil | (setq format-all-formatters '((C (clang-format --style=Google)))) |
 * MINI-BUFFER
 ** Vertico
 #+BEGIN_SRC emacs-lisp
@@ -538,9 +673,14 @@ Provides more completion backends for Corfu.
     :config
     (setq shell-file-name "/bin/sh"
           vterm-max-scrollback 5000))
+
+  (use-package multi-vterm :ensure t)
+  ;; dedicated terminal height of 30%
+  (setq multi-vterm-dedicated-window-height-percent 30)
 #+END_SRC
 
 #+RESULTS:
+: 30
 
 Also setting vterm-toggle so I can open easily to execute minor tasks inside of it without leaving the current buffer.
 #+BEGIN_SRC emacs-lisp
@@ -601,6 +741,14 @@ Helps interacting with projects (any versioned directory) inside Emacs.
 
 #+RESULTS:
 * OTHERS
+** Desktop Save
+#+BEGIN_SRC emacs-lisp
+  (desktop-save-mode 1)
+#+END_SRC
+
+#+RESULTS:
+: t
+
 ** App Launcher
 #+BEGIN_SRC emacs-lisp
   ;; DISABLED
@@ -608,3 +756,11 @@ Helps interacting with projects (any versioned directory) inside Emacs.
 #+END_SRC
 
 #+RESULTS:
+** PDF Tools
+#+BEGIN_SRC emacs-lisp
+  (use-package pdf-tools :ensure t)
+  (add-hook 'pdf-view-mode-hook 'pdf-view-themed-minor-mode)
+#+END_SRC
+
+#+RESULTS:
+| pdf-view-themed-minor-mode |
