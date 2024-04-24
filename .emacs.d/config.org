@@ -8,14 +8,14 @@
   (scroll-bar-mode 0)
 
   (set-face-attribute 'default nil
-  		    :family "PxPlus IBM VGA8"
-  		    :height 160
-  		    :weight 'regular)
+		    :family "PxPlus IBM VGA8"
+		    :height 160
+		    :weight 'regular)
 
   (defun display-line-numbers-hook ()
     (display-line-numbers-mode 1)
     (setq display-line-numbers 'relative
-  	display-line-numbers-current-absolute t))
+	display-line-numbers-current-absolute t))
 
   (add-hook 'prog-mode-hook 'display-line-numbers-hook)
   (add-hook 'org-mode-hook 'display-line-numbers-hook)
@@ -36,20 +36,20 @@
 #+BEGIN_SRC emacs-lisp
   (defvar bootstrap-version)
   (let ((bootstrap-file
-         (expand-file-name
-  	"straight/repos/straight.el/bootstrap.el"
-  	(or (bound-and-true-p straight-base-dir)
-  	    user-emacs-directory)))
-        (bootstrap-version 7))
+	 (expand-file-name
+	"straight/repos/straight.el/bootstrap.el"
+	(or (bound-and-true-p straight-base-dir)
+	    user-emacs-directory)))
+	(bootstrap-version 7))
     (unless (file-exists-p bootstrap-file)
       (with-current-buffer
-  	(url-retrieve-synchronously
-  	 "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
-  	 'silent 'inhibit-cookies)
-        (goto-char (point-max))
-        (eval-print-last-sexp)))
+	(url-retrieve-synchronously
+	 "https://raw.githubusercontent.com/radian-software/straight.el/develop/install.el"
+	 'silent 'inhibit-cookies)
+	(goto-char (point-max))
+	(eval-print-last-sexp)))
     (load bootstrap-file nil 'nomessage))
-
+  (straight-use-package 'org)
   (straight-use-package 'use-package)
 #+END_SRC
 * Code Completion
@@ -69,14 +69,34 @@
 * Org-mode
 #+BEGIN_SRC emacs-lisp
   (use-package org-roam
-    :straight t
-    :custom
-    (org-roam-completion-everywhere t)
-    :bind (("C-c r t" . org-roam-buffer-toggle)
-           ("C-c r f" . org-roam-node-find)
-           ("C-c r i" . org-roam-node-insert)
-           :map org-mode-map
-           ("C-M-i"    . completion-at-point)))
+  	:straight t
+  	:custom
+  	(org-roam-completion-everywhere t)
+  	:bind (("C-c r t" . org-roam-buffer-toggle)
+  	       ("C-c r f" . org-roam-node-find)
+  	       ("C-c r i" . org-roam-node-insert)
+  	       ("C-c r c" . org-roam-capture)
+  	       ;; Dailies
+  	       ("C-c r d" . org-roam-dailies-capture-today)
+  	       :map org-mode-map
+  	       ("C-M-i"    . completion-at-point))
+  	:config
+  	(setq org-roam-node-display-template (concat "${title:*} " (propertize "${tags:10}" 'face 'org-tag)))
+  	(org-roam-db-autosync-mode)
+  	:init
+  	(org-reload))
+
+  (use-package org-roam-ui
+  :straight
+    (:host github :repo "org-roam/org-roam-ui" :branch "main" :files ("*.el" "out"))
+    :after org-roam
+    :config
+    (setq org-roam-ui-sync-theme t
+          org-roam-ui-follow t
+          org-roam-ui-update-on-save t
+          org-roam-ui-open-on-start t))
+
+  (setq org-agenda-files (quote ("~/org-roam")))
 #+END_SRC
 * Search
 #+BEGIN_SRC emacs-lisp
@@ -126,5 +146,10 @@
   (use-package sorcery-theme
     :straight t)
 
-  (load-theme 'sorcery)
+  (load-theme 'sorcery t)
+
+  (use-package rainbow-mode
+    :straight t)
 #+END_SRC
+
+#+RESULTS:
