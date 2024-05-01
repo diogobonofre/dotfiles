@@ -1,16 +1,18 @@
-#import = ["/home/vaeep/dotfiles/alacritty/themes/themes/nord.toml"]
+import = [
+	"/home/vaeep/.config/alacritty/themes/themes/solarized_dark.toml"
+]
 
 [shell]
-program = "/bin/zsh"
+program = "/bin/bash"
 
 [window]
-padding = { x = 0 , y = 0}
+padding = { x = 5 , y = 5}
 opacity = 1
 
 [font]
-normal = { family = "Iosevka Nerd Font Mono", style = "Medium" }
-size = 32
-offset = { x = 0, y = 2 }
+normal = { family = "Iosevka NF", style = "Regular" }
+size =  20
+offset = { x = 0, y = 0 }
 
 [cursor]
 style = { shape = "Block", blinking = "Always" }
@@ -19,30 +21,3 @@ unfocused_hollow = true
 
 [mouse]
 hide_when_typing = true
-
-# Default colors
-[colors.primary]
-background = '#121212'
-foreground = '#ffffff'
-
-# Normal colors
-[colors.normal]
-black   = '#282828'
-red     = '#333333'
-green   = '#95A99F'
-yellow  = '#FFCC22'
-blue    = '#96A6C8'
-magenta = '#888888'
-cyan    = '#BBBBBB'
-white   = '#EBEEEE'
-
-# Bright colors
-[colors.bright]
-black   = '#282828'
-red     = '#333333'
-green   = '#95A99F'
-yellow  = '#FFCC22'
-blue    = '#96A6C8'
-magenta = '#888888'
-cyan    = '#BBBBBB'
-white   = '#EBEEEE'

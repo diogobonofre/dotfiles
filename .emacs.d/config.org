@@ -1,25 +1,27 @@
 #+TITLE: Vaeep's GNU Emacs Config
 #+AUTHOR: Diogo Bonofre (Vaeep)
 
-* Emacs Configuration
+* Editor
 #+BEGIN_SRC emacs-lisp
   (menu-bar-mode 0)
   (tool-bar-mode 0)
   (scroll-bar-mode 0)
 
   (set-face-attribute 'default nil
-		    :family "PxPlus IBM VGA8"
-		    :height 160
-		    :weight 'regular)
+  		    :family "Iosevka NF"
+  		    :height 200
+  		    :weight 'medium)
 
   (defun display-line-numbers-hook ()
-    (display-line-numbers-mode 1)
+    (display-line-numbers-mode t)
     (setq display-line-numbers 'relative
-	display-line-numbers-current-absolute t))
+  	display-line-numbers-current-absolute t))
 
   (add-hook 'prog-mode-hook 'display-line-numbers-hook)
   (add-hook 'org-mode-hook 'display-line-numbers-hook)
   (add-hook 'text-mode-hook 'display-line-numbers-hook)
+
+  (global-visual-line-mode 1)
 
   (electric-pair-mode t)
 #+END_SRC
@@ -52,12 +54,22 @@
   (straight-use-package 'org)
   (straight-use-package 'use-package)
 #+END_SRC
-* Code Completion
+* Development
+** Completion Interface
 #+BEGIN_SRC emacs-lisp
   (use-package company
     :straight t
     :config
     (global-company-mode))
+  
+  (setq company-minimum-prefix-length 1
+        company-idle-delay 0.0)
+#+END_SRC
+** Languages
+*** Language Servers
+#+BEGIN_SRC emacs-lisp
+  (use-package lsp-mode
+    :straight t)
 #+END_SRC
 * Terminal
 #+BEGIN_SRC emacs-lisp
@@ -133,7 +145,6 @@
           completion-category-defaults nil
           completion-category-overrides '((file (styles partial-completion)))))
 
-
   (use-package marginalia
     :straight t
     :bind (:map minibuffer-local-map
@@ -143,13 +154,11 @@
 #+END_SRC
 * Others
 #+BEGIN_SRC emacs-lisp
-  (use-package sorcery-theme
+  (use-package color-theme-solarized
     :straight t)
-
-  (load-theme 'sorcery t)
+  (load-theme 'solarized t)
+  (solarized-toggle-background-mode)
 
   (use-package rainbow-mode
     :straight t)
 #+END_SRC
-
-#+RESULTS:
