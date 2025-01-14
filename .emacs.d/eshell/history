@@ -1,0 +1,35 @@
+ls
+clear
+ls
+clear
+cd ..
+ls
+cd ..
+cd -
+ls
+cd programming/
+cd csharp/ChessCLI/CLI/
+ls
+clear
+dotnet run
+lear
+lear
+cat ../../tokens/github.txt 
+clear
+sudo snap install telegram-desktop
+clear
+ls
+clear
+ls
+clear
+la
+clear
+ll
+clear
+ls
+.bashrc
+.bashrc
+lear.bashrc
+cd
+clear
+source .bashrc
