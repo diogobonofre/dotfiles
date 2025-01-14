@@ -1,0 +1,6 @@
+.emacs.d/elpa
+.emacs.d/eshell
+.emacs.d/session*
+.emacs.d/auto-save-list
+.emacs.d/eln-cache
+**~
