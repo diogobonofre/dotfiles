@@ -119,4 +119,15 @@ bar {
         status_command i3status
 }
 
-exec --no-startup-id /usr/lib/gsd-xsettings 
+exec --no-startup-id /usr/lib/gsd-xsettings
+
+exec --no-startup-id feh --bg-fill ~/Pictures/wallhaven-3lm5k3.jpg
+
+assign [class="chromium"] 1
+exec chromium
+
+assign [class="emacs"] 1
+exec emacs
+
+assign [class="Spotify"] 2
+exec spotify
