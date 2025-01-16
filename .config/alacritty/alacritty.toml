@@ -1,2 +1,6 @@
+[general]
+import = [
+    "~/.config/alacritty/themes/navy.toml"
+]
 [font]
 normal = { family = "Iosevka" }
