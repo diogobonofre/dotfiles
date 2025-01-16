@@ -5,7 +5,7 @@
 (tool-bar-mode 0)
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
-(load-theme 'modus-vivendi t)
+(load-theme 'ef-deuteranopia-dark t)
 (global-visual-line-mode)
 (menu-bar--display-line-numbers-mode-relative)
 (global-display-line-numbers-mode t)
