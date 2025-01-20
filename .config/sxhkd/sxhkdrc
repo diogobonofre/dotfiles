@@ -2,6 +2,10 @@
 # wm independent hotkeys
 #
 
+# suspend system
+super + shift + s
+      systemctl suspend
+
 # terminal emulator
 super + Return
 	alacritty	
