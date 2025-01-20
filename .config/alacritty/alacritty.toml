@@ -4,3 +4,4 @@ import = [
 ]
 [font]
 normal = { family = "Iosevka" }
+size = 16
