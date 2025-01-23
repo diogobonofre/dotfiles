@@ -1,6 +1,6 @@
 [general]
 import = [
-    "~/.config/alacritty/themes/navy.toml"
+    "~/.config/alacritty/themes/wombat.toml"
 ]
 [font]
 normal = { family = "Iosevka" }
