@@ -3,5 +3,5 @@ import = [
     "~/.config/alacritty/themes/wombat.toml"
 ]
 [font]
-normal = { family = "Iosevka" }
+normal = { family = "Iosevka Extended" }
 size = 16
