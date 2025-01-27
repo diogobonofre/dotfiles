@@ -12,13 +12,12 @@
 (menu-bar-mode 0)
 (scroll-bar-mode 0)
 (column-number-mode 1)
-
-(load-theme 'wombat t)
+(load-theme 'tango-dark t)
 
 (custom-set-faces
- '(default ((t (:family "Iosevka Extended" :height 120 :weight medium))))
- '(variable-pitch ((t (:family "Iosevka Extended" :height 120 :weight medium))))
- '(fixed-pitch ((t (:family "Iosevka Extended" :height 120 :weight medium)))))
+ '(default ((t (:family "Monospaced" :height 120 :weight medium))))
+ '(variable-pitch ((t (:family "DeJavu Serif" :height 120 :weight medium))))
+ '(fixed-pitch ((t (:family "Monospaced" :height 120 :weight medium)))))
 
 (global-visual-line-mode)
 
