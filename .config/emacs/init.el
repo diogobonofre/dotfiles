@@ -26,10 +26,7 @@
             (display-line-numbers-mode t)
             (setq display-line-numbers 'relative)))
 
-(add-hook 'org-mode-hook
-          (lambda ()
-            (display-line-numbers-mode t)
-            (setq display-line-numbers 'absolute)))
+(add-hook 'org-mode-hook (lambda () (display-line-numbers-mode 0)))
 
 (electric-pair-mode t)
 (setq electric-pair-delete-adjacent-pairs t)
