@@ -43,5 +43,29 @@
 	org-hide-leading-stars t
 	org-clock-sound "~/Music/emacs-pomodoro-ding.wav"))
 
-(use-package eglot
-  :ensure t)
+(use-package eglot :ensure t)
+
+(use-package which-key
+  :ensure t
+  :init
+  (which-key-mode))
+
+;; Mini-buffer completion
+(setq completions-detailed t)			; additional information for options in *Completion* buffer
+; (setq completion-cycle-threshold 10)		; TAB will cycle between options instead of completions up to 10 options
+(setq read-buffer-completion-ignore-case t)	; disabling case sensitive matching
+(setq read-file-name-completion-ignore-case t)
+
+;; Default external browser
+(setq browse-url-browser-function 'browse-url-generic
+      browse-url-generic-program "chromium")
+
+;; Starts dired in dired-omit-mode by default -> C-x M-o to toggle
+(add-hook 'dired-mode-hook (lambda () (dired-omit-mode)))
+
+(add-hook 'org-mode-hook (lambda () (variable-pitch-mode)))
+
+(setq scroll-step 1			; how much it scrolls each time 
+      scroll-preserve-screen-position t ; prevent text from jumping beneath the cursor
+      scroll-margin 8			; minimum number of lines up and above the cursor
+      scroll-conservatively 10000)	; scroll only when extremely necessary
