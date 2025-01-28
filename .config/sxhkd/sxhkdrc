@@ -4,11 +4,11 @@
 
 # suspend system
 super + shift + s
-      systemctl suspend
+      	systemctl suspend
 
 # terminal emulator
 super + Return
-	alacritty	
+	emacsclient -c
 
 # program launcher
 super + @space
@@ -63,7 +63,7 @@ super + {_,shift + }{h,j,k,l}
 	bspc node -{f,s} {west,south,north,east}
 
 # focus the node for the given path jump
-super + {p,b,comma,period}
+super + {b,comma,period}
 	bspc node -f @{parent,brother,first,second}
 
 # focus the next/previous window in the current desktop
@@ -71,8 +71,8 @@ super + {_,shift + }c
 	bspc node -f {next,prev}.local.!hidden.window
 
 # focus the next/previous desktop in the current monitor
-super + bracket{left,right}
-	bspc desktop -f {prev,next}.local
+super + {p, n}
+     	bspc desktop -f {prev,next}.local
 
 # focus the last node/desktop
 super + {grave,Tab}
