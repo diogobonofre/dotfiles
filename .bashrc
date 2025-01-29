@@ -75,3 +75,4 @@ if ! shopt -oq posix; then
     . /etc/bash_completion
   fi
 fi
+eval "$(~/.local/bin/mise activate bash)"
