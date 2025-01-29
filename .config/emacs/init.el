@@ -1,3 +1,33 @@
+;;; init.el --- The Emacs sane default configuration  -*- lexical-binding: t; -*-
+;; Copyright (C) 2025 Diogo Bonofre
+;; Author: Diogo Bonofre <diogobonofre@gmail.com>
+;; Created: 29 Jan 2025
+;; Keywords: emacs configuration init
+;; URL: https://github.com/diogobonofre/dotfiles
+;; Package-Requires: (emacs "29.x")
+;; Commentary: This is a Emacs configuration who tries to give more sane defaults,
+;;	       several quality of life improvements and to be a reference for other
+;;	       ergonomic configurations for new users and old lazy ones. It's not
+;;	       an attempt of creating a Visual Studio Code replica inside Emacs,
+;;	       instead, it's an attempt of using Emacs to it's fullest in it's
+;;	       own way, respecting the editor philosophy and design.
+;;
+;; This file is not part of GNU Emacs.
+;;
+;; This program is free software: you can redistribute it and/or modify it under
+;; the terms of the GNU General Public License as published by the Free Software
+n;; Foundation, either version 3 of the License, or (at your option) any later version.
+;; This program is distributed in the hope that it will be useful, but WITHOUT ANY
+;; WARRANTY; without even the implied warranty of MERCHANTABILITY or FITNESS FOR A
+;; PARTICULAR PURPOSE.
+;;
+;; See the GNU General Public License for more details. You should have received a
+;; copy of the GNU General Public License along with this program. If not, see
+;; <https://www.gnu.org/licenses/>.
+
+;;; Code
+
+;;; Packages & File Structure
 (setq custom-file "~/.config/emacs/custom-variables.el")
 
 (require 'package)
