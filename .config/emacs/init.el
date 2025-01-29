@@ -202,7 +202,17 @@ n;; Foundation, either version 3 of the License, or (at your option) any later v
        nil t)
       dir))))
 
-(global-set-key (kbd "C-c o r") 'find-org-roam-file)
+;;;; Keybindings
+;;;;; Org Mode Prefix: C-c & C-c o 
+(global-set-key (kbd "C-c o h") 'find-org-home)
+(global-set-key (kbd "C-c o f") 'find-org-notes-file)
+(global-set-key (kbd "C-c l") #'org-store-link)
+(global-set-key (kbd "C-c a") #'org-agenda)
+(global-set-key (kbd "C-c c") #'org-capture)
+
+;;;;; Packages
+(use-package org-superstar
+  :hook (org-mode . org-superstar-mode))
 
 ;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;;
 ;;;;                         LSPs & Code Completion                         ;;;;
@@ -219,7 +229,6 @@ n;; Foundation, either version 3 of the License, or (at your option) any later v
 	 ((c++-mode c-mode) . lsp-deferred))
   :commands
   (lsp lsp-deferred))
-
 
 ;;;; Company Prefix: C-c c
 (use-package company
